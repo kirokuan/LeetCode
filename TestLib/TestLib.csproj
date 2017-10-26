@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+    <PackageReference Include="Nunit" Version="3.7.1" />
+    <PackageReference Include="NUnit.Console" Version="3.7.0" />
+    <PackageReference Include="NUnit.Runners" Version="3.7.0" />
+    <PackageReference Include="Nunit3TestAdapter" Version="3.8.0" />
+    <PackageReference Include="Xunit" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>
