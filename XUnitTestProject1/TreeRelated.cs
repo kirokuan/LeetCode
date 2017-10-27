@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xunit;
 
 namespace XUnitTestProject1
 {
@@ -55,5 +56,20 @@ namespace XUnitTestProject1
 
             return root;
         }
+
+        public void PrintNode(TreeNode root, int level) {
+            if (level != 1) {
+                if (root.left != null) PrintNode(root.left, level - 1);
+                if (root.right != null) PrintNode(root.right, level - 1);
+                return;
+            }
+            Console.WriteLine(root.val);
+        }
+        
     }
-}
+    public class TreeTest
+    {
+
+
+    }
+ }

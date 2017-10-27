@@ -57,6 +57,52 @@ namespace XUnitTestProject1
             }
             return max;
         }
+        public static string MinWindow2(string s, string t) {
+            var k = 0;
+            var dict = t.Select(x => new
+            {
+                index = k++,
+                c = x
+            }).GroupBy(x => x.c)
+            .ToDictionary(x => x.Key, y => y.Select(j => j.index).ToList());
+            var filled = t.Distinct().ToDictionary(x=>x,v=>new Queue<int>());//Enumerable.Repeat(-1,t.Length).ToList();
+            var max = "";
+            var start = -1;
+            var end=-1;
+            var changed = false;
+            var num = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dict.ContainsKey(s[i])) {
+                    var list = dict[s[i]];
+                    filled[s[i]].Enqueue(i);
+                    end = i;
+                    num++;
+                    if (filled[s[i]].Count - 1 == dict[s[i]].Count)
+                    {
+                        var x = filled[s[i]].Dequeue();
+                        num--;
+                        if (x == start && num == t.Length)
+                        {
+                            changed = true;
+                            start = filled.Min(p => p.Value.Peek());
+                        }
+                    }
+                    if (num== t.Length)
+                    {
+                        changed = true;
+                        start = filled.Min(p => p.Value.Peek());
+                    }
+                    if (changed) {
+                        if (end - start + 1 < max.Length || string.IsNullOrEmpty(max)) {
+                            max = s.Substring(start, end - start + 1);
+                        }
+                        changed = false;
+                    }
+                }
+            }
+            return max;
+        }
     }
     public class SWTest
     {
@@ -72,10 +118,12 @@ namespace XUnitTestProject1
         [InlineData("ADOBECODEBANC", "ABC", "BANC")]
         [InlineData("aa", "aa", "aa")]
         [InlineData("abc", "cba", "abc")]
- ///       [InlineData("aaaaaaaaaaaabbbbbcdd", "abcdd", "abbbbbcdd")]
+       [InlineData("aaaaaaaaaaaabbbbbcdd", "abcdd", "abbbbbcdd")]
+       [InlineData("cabeca", "cae", "eca")]
+       [InlineData("cabefgecdaecf", "cae", "aec")]
         public void test2(string s, string t, string answer)
         {
-            Assert.Equal(answer, SlidingWindow.MinWindow(s, t));
+            Assert.Equal(answer, SlidingWindow.MinWindow2(s, t));
 
         }
     }
