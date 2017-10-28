@@ -9,14 +9,13 @@ namespace LeetCode
     {
         public int RangeBitwiseAnd(int m, int n)
         {
+            if (m == 0 || n == 0) return 0;
             if (m == n) return m;
-            var pow = 0;
-            while (Math.Pow(2, pow) <= m) {
-                pow++;
-            }
-            if(Math.Pow(2, pow)<=n) return 0;
-            var high = (int)Math.Pow(2, pow-1);
-            return high+ RangeBitwiseAnd(m^high,n^high);
+            var pow = Math.Floor(Math.Log(m,2))+1;
+            
+            if (Math.Pow(2, pow) <= n) return 0;
+            var high = (int)Math.Pow(2, pow - 1);
+            return high + RangeBitwiseAnd(m ^ high, n ^ high);
         }
     }
     public class RangeBitwiseAndTest
