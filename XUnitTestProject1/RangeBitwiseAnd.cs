@@ -11,8 +11,7 @@ namespace LeetCode
         {
             if (m == 0 || n == 0) return 0;
             if (m == n) return m;
-            var pow = Math.Floor(Math.Log(m,2))+1;
-            
+            var pow = Math.Floor(Math.Log(m,2))+1;            
             if (Math.Pow(2, pow) <= n) return 0;
             var high = (int)Math.Pow(2, pow - 1);
             return high + RangeBitwiseAnd(m ^ high, n ^ high);
