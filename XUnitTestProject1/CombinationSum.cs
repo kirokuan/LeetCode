@@ -55,11 +55,6 @@ namespace XUnitTestProject1
             }
             var x = new int?[target+1];
             x[0] = 1;
-            /*        
-            for (int i = 1; i <= target; i++)
-            {
-                x[i]= nums.Sum(t => i-t>=0?x[i - t]:0);
-            }*/
             return TopDown(nums,x,target);
         }
         public int TopDown(int[] nums,int?[] cache, int target) {
